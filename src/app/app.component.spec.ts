@@ -99,6 +99,11 @@ describe('AppComponent', () => {
     expect(result).toBe(6);
   });
 
+  it('should ignore Numbers bigger than 1000', () => {
+    const result = component.add('1\n2,1001');
+    expect(result).toBe(4);
+  });
+
   it('should accept any delimiter //;\n1;2', () => {
     const result = component.add('//;\n1;2');
     expect(result).toBe(3);
@@ -112,6 +117,21 @@ describe('AppComponent', () => {
   it('should accept any delimiter //$\n1$4', () => {
     const result = component.add('//$\n1$4');
     expect(result).toBe(5);
+  });
+
+  it('should accept multiple delimiters with length longer than one char 1**3**4**5', () => {
+    const result = component.add('1**3**4**5');
+    expect(result).toBe(13);
+  });
+
+  it('should accept any delimiter //[***]\n1***2***3', () => {
+    const result = component.add('//[***]\n1***2***3');
+    expect(result).toBe(6);
+  });
+
+  it('should accept any delimiter //[*][%]\n1*2%3', () => {
+    const result = component.add('//[*][%]\n1*2%3');
+    expect(result).toBe(6);
   });
 
   it('should not accept negative numbers', () => {

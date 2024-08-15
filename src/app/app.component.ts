@@ -42,7 +42,13 @@ export class AppComponent {
       );
     }
 
-    let total = allNumbers.reduce((x, y) => x + y);
+    let total = allNumbers.reduce((accumulator, current) => {
+      if (current > 1000) {
+        return accumulator + (current - 1000);
+      } else {
+        return accumulator + current;
+      }
+    }, 0);
 
     console.log('Total : ', total);
 
